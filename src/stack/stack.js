@@ -1,28 +1,33 @@
 class Stack {
   constructor() {
-    this.array = [];
+    this.count = 0;
+    this.head = null;
   }
 
   size() {
-    return this.array.length;
+    return this.count;
   }
 
   push(item) {
-    this.array.push(item);
+    this.head = { item: item, next: this.head };
+    this.count++;
   }
 
   pop() {
-    if (this.array.length <= 0) {
+    if (this.head === null) {
       throw new Error('Stack is Empty');
     }
-    return this.array.pop();
+    const item = this.head.item;
+    this.head = item.next;
+    this.count--;
+    return item;
   }
 
   peek() {
-    if (this.array.length <= 0) {
+    if (this.head === null) {
       throw new Error('Stack is Empty');
     }
-    return this.array[this.array.length - 1];
+    return this.head.item;
   }
 }
 
